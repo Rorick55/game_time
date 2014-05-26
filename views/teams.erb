@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title></title>
+  <link rel="stylesheet" href='styles.css'>
+</head>
+
+<body>
+  <p style="float:right;margin-right:15px;margin-top:-50px;"><a href="/leaderboard">Leaderboard</a></p>
+  <p style="float:right;margin-right:15px;margin-top:-35px;"><a href="/">home</a></p>
+    <h1 style="text-align:center;margin-top:80px;"><%= params[:team] %></h1>
+      <% @wins_losses.each do |team,value| %>
+        <% if team == params[:team] %>
+          <p style="margin-top:-10px;text-align:center;">Wins: <%= value[:wins] %>  Losses: <%= value[:losses] %></p>
+        <%end%>
+      <%end%>
+    <p style="margin-top:30px;text-align:center;">Games:</p>
+    <table style="width:400px;text-align:left;margin-left:auto;margin-right:auto;">
+      <tr>
+        <th>Home Team</th>
+        <th>Score</th>
+        <th>Away Team</th>
+        <th>Score</th>
+      </tr>
+        <% @games_breakdown.each do |game| %>
+          <%if game.has_value? params[:team] %>
+        <tr>
+        <td><%= game[:home_team] %>:</td>
+        <td><%= game[:home_score] %></td>
+        <td><%= game[:away_team] %>:</td>
+        <td><%= game[:away_score] %></td>
+      </tr>
+        <%end%>
+      <% end %>
+    </table>
+  </body>
+</html>
